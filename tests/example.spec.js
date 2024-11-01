@@ -11,7 +11,7 @@ test('test', async ({ page }) => {
 	console.log(process.env.Username);
 	console.log(process.env.Baseurl);
 
-	await page.goto('https://academybugs.com/find-bugs/#');
+	await page.goto('.');
 	await page.getByRole('link', { name: '50' }).click();
 	await expect(page.locator('.academy-bug-overlay')).toContainText(
 		'You found a crash bug, examine the page for',
