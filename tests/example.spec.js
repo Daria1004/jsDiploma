@@ -9,6 +9,7 @@ test('test', async ({ page }) => {
 
 	//
 	console.log(process.env.Username);
+	console.log(process.env.Baseurl);
 
 	await page.goto('https://academybugs.com/find-bugs/#');
 	await page.getByRole('link', { name: '50' }).click();

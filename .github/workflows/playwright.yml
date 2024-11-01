@@ -29,6 +29,7 @@ jobs:
       run: npx playwright test
       env: 
         Username: ${{secrets.USERNAME}}
+        Baseurl: ${{vars.BASEURL}}
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
       with:
