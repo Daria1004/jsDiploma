@@ -1,6 +1,8 @@
 import { test, expect } from '@playwright/test';
 
 test('test', async ({ page }) => {
+	console.log(process.env);
+
 	// Переменная на уровне workflow
 	console.log(process.env.QualityGates);
 	// Переменная на уровне job
