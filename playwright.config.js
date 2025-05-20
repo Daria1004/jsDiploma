@@ -12,6 +12,7 @@ const { defineConfig, devices } = require('@playwright/test');
  */
 module.exports = defineConfig({
 	testDir: './tests',
+	timeout: 60000,
 	/* Run tests in files in parallel */
 	fullyParallel: true,
 	/* Fail the build on CI if you accidentally left test.only in the source code. */
@@ -22,9 +23,9 @@ module.exports = defineConfig({
 	workers: process.env.CI ? 1 : undefined,
 	/* Reporter to use. See https://playwright.dev/docs/test-reporters */
 	reporter: process.env.CI
-		? [['html', { open: 'never' }], ['line']]
-		: [['html', { open: 'never' }], ['line']],
-
+		? [['html', { open: 'never' }], ['line'], ["allure-playwright"]]
+		: [['html', { open: 'never' }], ['line'], ["allure-playwright"]],
+  
 	/* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
 	use: {
 		baseURL: process.env.Baseurl ?? 'https://academybugs.com/find-bugs/#',

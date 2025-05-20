@@ -10,7 +10,16 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
+    "@faker-js/faker": "^9.7.0",
     "@playwright/test": "^1.48.2",
-    "@types/node": "^22.8.6"
+    "@types/node": "^22.8.6",
+    "eslint": "^9.26.0",
+    "globals": "^16.1.0"
+  },
+  "dependencies": {
+    "allure-js-commons": "^3.2.2",
+    "allure-playwright": "^3.2.2",
+    "eslint-config-prettier": "^10.1.5",
+    "prettier": "^3.5.3"
   }
 }
