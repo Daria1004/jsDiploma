@@ -1,44 +1,30 @@
-name: Playwright Tests
-env:
-  QualityGates: 1
+# Называем workflow
+name: pw tests
+# Когда мы запускаем автотесты
 on:
   push:
     branches: [ main, master ]
   pull_request:
     branches: [ main, master ]
+ # ручной запуск   
   workflow_dispatch:
-    inputs:
-      Baseurl:
-        description: 'this is URL for tests'
-        required: true
-        default: 'https://academybugs.com/find-bugs/#'
+# jobs
 jobs:
-  test:
-    timeout-minutes: 60
+  e2eTests:
+    timeout-minutes: 30
     runs-on: ubuntu-latest
-    env:
-      Integration: API
     steps:
-    - uses: actions/checkout@v4
-    - uses: actions/setup-node@v4
-      with:
-        node-version: lts/*
-    - name: This is demo step, please delete IT
-      run: echo "Мы проходим ворота качества. $QualityGates Вид тестирования $Integration, тип тестирования $TypeOfTests"
-      env:
-        TypeOfTests: Sanity
-    - name: Install dependencies
-      run: npm ci
-    - name: Install Playwright Browsers
-      run: npx playwright install --with-deps
-    - name: Run Playwright tests
-      run: npx playwright test
-      env: 
-        Username: ${{secrets.USERNAME}}
-        Baseurl: ${{vars.BASEURL}}
-    - uses: actions/upload-artifact@v4
-      if: ${{ !cancelled() }}
-      with:
-        name: playwright-report
-        path: playwright-report/
-        retention-days: 30
+      # делаем чекаут
+      - uses: actions/checkout@v4
+      # устанавливаем node.js
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+      # устанавливаем пакеты node
+      - name: Установить пакеты
+        run: npm i
+      # устанавливаем PW
+      - name: Установить PW
+        run: npx playwright install --with-deps
+      - name: Запустить PW
+        run: npm run test
