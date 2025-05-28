@@ -37,7 +37,7 @@ jobs:
           path: test-results
           retention-days: 20
       # Сохраняем результаты Allure 
-      - uses: actions/checkout@v4 
+      - uses: actions/upload-artifact@v4
         if: always()
         continue-on-error: true
         with:
@@ -45,7 +45,7 @@ jobs:
           path: allure-results
           retention-days: 20
       # Забираем результаты предыдущего запуска  
-      - uses: actions/upload-artifact@v4
+      - uses: actions/checkout@v4
         if: always()
         continue-on-error: true
         with:
