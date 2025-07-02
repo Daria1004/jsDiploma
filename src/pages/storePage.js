@@ -1,4 +1,6 @@
 import { step } from "allure-js-commons";
+import { expect } from '@playwright/test';
+
 export class StorePage {
     constructor(page) {
         this.page = page;
@@ -9,6 +11,7 @@ export class StorePage {
         this.emailForm = page.locator('form.comment-form').locator('input#email');
         this.buttonPostComment = page.locator('form.comment-form').locator('input#submit');
         this.signUpLink = page.locator('.ec_cart_input_row').getByRole('link', {name: "Sign Up"});
+        this.crashBugOverlay = page.locator('.academy-bug-info-overlay');
     }   
 
     async gotoManufacturer() {
@@ -40,4 +43,18 @@ export class StorePage {
             await this.buttonPostComment.click();
         });
     } 
-};
+
+    async verifyCrashBugMessageIsVisibleShort() {
+        await step("Краш баг сообщение видимо", async () => {
+            await expect(this.crashBugOverlay)
+            .toContainText('You found a crash bug, examine the page for 5 seconds.');
+        });
+    }
+
+    async verifyCrashBugMessageIsVisibleLong() {
+        await step("Краш баг сообщение видимо", async () => {
+            await expect(this.crashBugOverlay)
+            .toContainText('You found a crash bug, examine the page by clicking on any button for 5 seconds.');
+        });
+    }
+}

@@ -16,11 +16,8 @@ test.describe('Карточка товара', () => {
     const storePage = new StorePage(page);
     await page.waitForTimeout(3000);
     await storePage.changeCurrency("EUR");
-
-    await expect(page.locator('.academy-bug-info-overlay')).toContainText(
-    'You found a crash bug, examine the page for 5 seconds.'
-    );
-})
+    await storePage.verifyCrashBugMessageIsVisibleShort();
+ });
 
 test('Manufacturer link should not lead to error page', {tag: ['@extra/stored/hdx/_page', '@16', '@functional']},async ({ page }) => {
     const mainPage = new MainPage(page);
@@ -57,8 +54,6 @@ test('Manufacturer link should not lead to error page', {tag: ['@extra/stored/hd
             .generate();
 
     await storePage.addComment(commentBuilder);
-
-    await expect(page.locator('.academy-bug-info-overlay'))
-    .toContainText('You found a crash bug, examine the page by clicking on any button for 5 seconds.');
+    await storePage.verifyCrashBugMessageIsVisibleLong();
   });
 });

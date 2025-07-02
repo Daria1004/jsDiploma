@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test } from '@playwright/test';
 import { MainPage, FindBugsPage, StorePage, AccountPage, ForgotPasswordPage } from '../src/pages/index';
 import { AccountBuilder } from '../src/helpers/builder/index';
 
@@ -28,9 +28,7 @@ test.describe('Аккаунт', () => {
     await forgotPasswordPage.fillEmail(accountBuilder);
 
     await forgotPasswordPage.retrievePassword();
-  
-    await expect(page.locator('.academy-bug-info-overlay')).toContainText(
-    'You found a crash bug, examine the page for 5 seconds.'
-    );
+
+    await forgotPasswordPage.verifyCrashBugMessageIsVisible();
   });
 });

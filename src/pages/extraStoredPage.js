@@ -1,4 +1,5 @@
 import { step } from "allure-js-commons";
+import { expect } from '@playwright/test';
 export class ExtraStoredPage {
     constructor(page) {
         this.page = page;

@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test } from '@playwright/test';
 import { MainPage, FindBugsPage } from '../src/pages/index';
 
 test.describe('Каталог товаров', () => {
@@ -10,10 +10,7 @@ test.describe('Каталог товаров', () => {
 
     const findBugsPage = new FindBugsPage(page);
     await findBugsPage.changeItemsOnPage();
-
-    await expect(page.locator('.academy-bug-overlay')).toContainText(
-      'You found a crash bug, examine the page by clicking on any button for 5 seconds.'
-    );
+    await findBugsPage.verifyCrashBugMessageIsVisible();
   });
 });
 
