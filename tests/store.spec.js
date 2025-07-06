@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { MainPage, FindBugsPage, StorePage, ExtraStoredPage } from '../src/pages/index';
 import { CommentBuilder } from '../src/helpers/builder/index';
+import { step } from "allure-js-commons";
 
 test.describe('Карточка товара', () => {
   test('Changing currency should not freeze the page', {tag: ['@store_page', '@03', '@crash']}, async ({ page }) => { //выбрать другую валюту
@@ -16,7 +17,11 @@ test.describe('Карточка товара', () => {
     const storePage = new StorePage(page);
     await page.waitForTimeout(3000);
     await storePage.changeCurrency("EUR");
-    await storePage.verifyCrashBugMessageIsVisibleShort();
+    
+    await step("Краш баг сообщение видимо", async () => {
+      await expect(storePage.crashBugOverlay)
+      .toContainText('You found a crash bug, examine the page for 5 seconds.');
+    });
  });
 
 test('Manufacturer link should not lead to error page', {tag: ['@extra/stored/hdx/_page', '@16', '@functional']},async ({ page }) => {
@@ -54,6 +59,10 @@ test('Manufacturer link should not lead to error page', {tag: ['@extra/stored/hd
             .generate();
 
     await storePage.addComment(commentBuilder);
-    await storePage.verifyCrashBugMessageIsVisibleLong();
+
+    await step("Краш баг сообщение видимо", async () => {
+      await expect(storePage.crashBugOverlay)
+      .toContainText('You found a crash bug, examine the page by clicking on any button for 5 seconds.');
+    });
   });
 });

@@ -1,6 +1,7 @@
-import { test } from '@playwright/test';
+import { test, expect } from '@playwright/test';
 import { MainPage, FindBugsPage, StorePage, AccountPage, ForgotPasswordPage } from '../src/pages/index';
 import { AccountBuilder } from '../src/helpers/builder/index';
+import { step } from "allure-js-commons";
 
 test.describe('Аккаунт', () => {
   test('Password retrieval does not work on AcademyBugs', {tag: ['@forgot_password_page', '@21', '@crush']}, async ({ page }) => {
@@ -29,6 +30,9 @@ test.describe('Аккаунт', () => {
 
     await forgotPasswordPage.retrievePassword();
 
-    await forgotPasswordPage.verifyCrashBugMessageIsVisible();
-  });
+    await step("Краш баг сообщение видимо", async () => {
+        await expect(forgotPasswordPage.crashBugOverlay).toContainText(
+        'You found a crash bug, examine the page for 5 seconds.');
+        });  
+    });
 });

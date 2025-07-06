@@ -1,5 +1,4 @@
 import { step } from "allure-js-commons";
-import { expect } from '@playwright/test';
 export class FindBugsPage {
     
     constructor(page){
@@ -20,11 +19,4 @@ export class FindBugsPage {
             await this.productLink.click();
         });
     } 
-
-    async verifyCrashBugMessageIsVisible() {
-        await step("Краш баг сообщение видимо", async () => {
-            await expect(this.crashBugOverlay).toContainText(
-            'You found a crash bug, examine the page by clicking on any button for 5 seconds.');
-        });
-    }
 }
