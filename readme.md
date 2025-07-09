@@ -20,15 +20,15 @@
 **apichallenges.herokuapp.com** — тренировочный сервис, предназначенный для отработки навыков автоматизации api тестов.
 
 ## Технологический стек
-<img src="C:\Users\Otempora\JSProjects\jsDiploma\img\javascript.png" title="JavaScript" width="50" height="50"/>
-<img src="C:\Users\Otempora\JSProjects\jsDiploma\img\playwright.jpg" title="Playwrite" width="50" height="50"/>
-<img src="C:\Users\Otempora\JSProjects\jsDiploma\img\git.svg" alt="Git" width="50" height="50"/>
-<img src="C:\Users\Otempora\JSProjects\jsDiploma\img\github.png" title="GitHub" alt="GitHub" width="50" height="50"/>
-<img src="C:\Users\Otempora\JSProjects\jsDiploma\img\allure framework.png" alt="Allure Framework" width="50" height="50"/>
-<img src="C:\Users\Otempora\JSProjects\jsDiploma\img\allure testops.svg" alt="Allure TestOps" width="45" height="45" />
-<img src="C:\Users\Otempora\JSProjects\jsDiploma\img\fakerjs.svg" alt="Fakerjs" width="50" height="50"/>
-<img src="C:\Users\Otempora\JSProjects\jsDiploma\img\jenkins.png" alt="Jenkins" width="50" height="50"/>
-<img src="C:\Users\Otempora\JSProjects\jsDiploma\img\telegram.png" title="Telegram" width="50" height="50"/>
+<img src="img/javascript.png" title="JavaScript" width="50" height="50"/>
+<img src="img/playwright.jpg" title="Playwrite" width="50" height="50"/>
+<img src="img/git.svg" alt="Git" width="50" height="50"/>
+<img src="img/github.png" title="GitHub" alt="GitHub" width="50" height="50"/>
+<img src="img/allure framework.png" alt="Allure Framework" width="50" height="50"/>
+<img src="img/allure testops.svg" alt="Allure TestOps" width="45" height="45" />
+<img src="img/fakerjs.svg" alt="Fakerjs" width="50" height="50"/>
+<img src="img/jenkins.png" alt="Jenkins" width="50" height="50"/>
+<img src="img/telegram.png" title="Telegram" width="50" height="50"/>
 
 ## Запуск тестов через Jenkins
 Для запуска тестов необходимо авторизоваться на сайте Jenkins, перейти в нужную джобу и нажать Build Now. 
