@@ -1,67 +1,41 @@
-import { test, expect } from '@playwright/test';
-import { MainPage, FindBugsPage, StorePage, ExtraStoredPage } from '../src/pages/index';
-import { CommentBuilder } from '../src/helpers/builder/index';
+import { expect } from '@playwright/test';
+import { test } from '../src/helpers/fixtures/index';
+import { CommentBuilder } from '../src/helpers/builders/index';
 import { step } from "allure-js-commons";
 
 test.describe('Карточка товара', () => {
-  test('Changing currency should not freeze the page', {tag: ['@store_page', '@03', '@crash']}, async ({ page }) => { //выбрать другую валюту
-    const mainPage = new MainPage(page);
-    await mainPage.open();
-
-    await mainPage.closeTutorial();
-    await mainPage.gotoFindBugs();  
-
-    const findBugsPage = new FindBugsPage(page);
-    await findBugsPage.openFirstProduct();
-
-    const storePage = new StorePage(page);
-    await page.waitForTimeout(3000);
-    await storePage.changeCurrency("EUR");
+  test('Changing currency should not freeze the page', {tag: ['@store_page', '@ui', '@03', '@crash']}, async ({ app }) => { //выбрать другую валюту
+    await app.findBugs.openFirstProduct();
+    await app.store.changeCurrency("EUR");
     
     await step("Краш баг сообщение видимо", async () => {
-      await expect(storePage.crashBugOverlay)
+      await expect(app.store.crashBugOverlay)
       .toContainText('You found a crash bug, examine the page for 5 seconds.');
     });
  });
 
-test('Manufacturer link should not lead to error page', {tag: ['@extra/stored/hdx/_page', '@16', '@functional']},async ({ page }) => {
-    const mainPage = new MainPage(page);
-    await mainPage.open();
-    await mainPage.closeTutorial();
-    await mainPage.gotoFindBugs();  
+test('Manufacturer link should not lead to error page', {tag: ['@extra/stored/hdx/_page', '@ui', '@16', '@functional']},async ({ app }) => {
+    await app.findBugs.openFirstProduct();
+    await app.store.gotoManufacturer();
 
-    const findBugsPage = new FindBugsPage(page);
-    await findBugsPage.openFirstProduct();
-
-    const storePage = new StorePage(page);
-    await storePage.gotoManufacturer();
-
-    const extraStoredPage = new ExtraStoredPage(page);
-    await expect(extraStoredPage.errorContainer).toBeVisible();
-    await expect(extraStoredPage.errorContainer).toContainText("Oops! That page can’t be found.");
+    await step("Краш баг сообщение видимо", async () => {
+      await expect(app.extraStored.errorContainer).toBeVisible();
+      await expect(app.extraStored.errorContainer).toContainText("Oops! That page can’t be found.");
+    });
   });
 
-  test('Comment form should not freeze the page on submission', {tag: ['@store_page', '@02', '@crash']}, async ({ page }) => { //оставить комментарий
-    const mainPage = new MainPage(page);
-    await mainPage.open();
-    await mainPage.closeTutorial();
-    await mainPage.gotoFindBugs();  
-
-    const findBugsPage = new FindBugsPage(page);
-    await findBugsPage.openFirstProduct();
-
-    const storePage = new StorePage(page);
-
+  test('Comment form should not freeze the page on submission', {tag: ['@store_page', '@ui', '@02', '@crash']}, async ({ app }) => { //оставить комментарий
     const commentBuilder = new CommentBuilder()
             .addText()
             .addName()
             .addEmail()
             .generate();
 
-    await storePage.addComment(commentBuilder);
+    await app.findBugs.openFirstProduct();
+    await app.store.addComment(commentBuilder);
 
     await step("Краш баг сообщение видимо", async () => {
-      await expect(storePage.crashBugOverlay)
+      await expect(app.store.crashBugOverlay)
       .toContainText('You found a crash bug, examine the page by clicking on any button for 5 seconds.');
     });
   });
