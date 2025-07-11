@@ -3,7 +3,7 @@ export class MainPage {
     constructor(page) {
         this.page = page;
         this.findBugsLink = page.getByRole('link', { name: 'Find Bugs' });
-        this.baseURL = process.env.URL ?? 'https://academybugs.com';
+        this.baseURL = '/';
         this.popupTutorialCloseButton = page.getByRole('button', {class: '.pum-close.popmake-close', name: '×'})
     }   
 
