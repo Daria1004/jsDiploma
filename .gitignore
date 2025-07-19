@@ -7,3 +7,6 @@ node_modules/
 /.env
 /allure-report
 /allure-results
+/.prettierrc.json
+/.prettierrc.yml
+/.vscode
